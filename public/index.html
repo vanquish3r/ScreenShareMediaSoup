@@ -264,6 +264,7 @@
         console.error(err);
         return;
       });
+      console.log("here");
       const connectData = await  sendRequest('connectRoom', { room: room });
       socket.on('connectRoom',(...args) => {
         console.log(args);
