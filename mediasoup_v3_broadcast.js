@@ -415,6 +415,10 @@ function notInRoom(socket, room, isProducer, callback) {
 }
 
 function killConsumer(socket) {
+  const room = Room.getRoom(socket.room);
+  if(!room) {
+    return;
+  }
   let consumer = room.videoConsumers[socket.id];
   if (consumer) {
     consumer.close();
@@ -508,16 +512,6 @@ const mediasoupOptions = {
 
 let worker = null;
 
-// TODO Need to move all these into the room context.
-// let router = null;
-// let producerTransport = null;
-// let videoProducer = null;
-// let audioProducer = null;
-// let producerSocketId = null;
-//let consumerTransport = null;
-//let subscribeConsumer = null;
-
-
 async function startWorker() {
   worker = await mediasoup.createWorker();
   console.log('-- mediasoup worker start. --')
@@ -525,61 +519,6 @@ async function startWorker() {
 
 startWorker();
 
-//
-// Room {
-//   id,
-//   transports[],
-//   consumers[],
-//   producers[],
-// }
-//
-
-// --- multi-consumers --
-// let transports = {};
-// let videoConsumers = {};
-// let audioConsumers = {};
-
-// function getConsumerTrasnport(id) {
-//   return transports[id];
-// }
-
-// function addConsumerTrasport(id, transport) {
-//   transports[id] = transport;
-//   console.log('consumerTransports count=' + Object.keys(transports).length);
-// }
-
-// function removeConsumerTransport(id) {
-//   delete transports[id];
-//   console.log('consumerTransports count=' + Object.keys(transports).length);
-// }
-
-// function getVideoConsumer(id) {
-//   return videoConsumers[id];
-// }
-
-// function addVideoConsumer(id, consumer) {
-//   videoConsumers[id] = consumer;
-//   console.log('videoConsumers count=' + Object.keys(videoConsumers).length);
-// }
-
-// function removeVideoConsumer(id) {
-//   delete videoConsumers[id];
-//   console.log('videoConsumers count=' + Object.keys(videoConsumers).length);
-// }
-
-// function getAudioConsumer(id) {
-//   return audioConsumers[id];
-// }
-
-// function addAudioConsumer(id, consumer) {
-//   audioConsumers[id] = consumer;
-//   console.log('audioConsumers count=' + Object.keys(audioConsumers).length);
-// }
-
-// function removeAudioConsumer(id) {
-//   delete audioConsumers[id];
-//   console.log('audioConsumers count=' + Object.keys(audioConsumers).length);
-// }
 
 function removeAllConsumers(room) {
   for (const key in room.videoConsumers) {
