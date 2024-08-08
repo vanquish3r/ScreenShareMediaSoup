@@ -345,9 +345,7 @@ io.on('connection', function (socket) {
   }
 
   // --- send error to client ---
-  function sendReject(error, callback) {
-    callback(error.toString(), null);
-  }
+  
 
   function sendback(socket, message) {
     socket.emit('message', message);
@@ -403,6 +401,10 @@ class Room{
 }
 
 Room.rooms = {};
+
+function sendReject(error, callback) {
+  callback(error.toString(), null);
+}
 
 function notInRoom(socket, room, isProducer, callback) {
   const notInRoom = !socket.room || !room || (isProducer && !(socket.id.toString() === room.producerSocketId.toString()));
