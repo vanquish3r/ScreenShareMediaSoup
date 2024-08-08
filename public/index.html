@@ -5,6 +5,24 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="charset=UTF-8" />
   <title>mediasoup v3 subscribe</title>
+  <style>
+
+    body,html{
+      background-color: black;
+      width: 100%;
+      height: 100%;
+    }
+
+    video{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%)
+    }
+  </style>
   <!--
     // mediasoup_v3_example
     //   https://github.com/mganeko/mediasoup_v3_example
@@ -22,13 +40,13 @@
 </head>
 
 <body>
-  mediasoup v3 subscribe with socket.io<br />
+  <!-- mediasoup v3 subscribe with socket.io<br />
   <button id="subscribe_button" onclick="subscribe();">Subscribe</button>
   <button id="disconnect_button" onclick="disconnect();">Disconnect</button>
   <div>
     <span id="state_span"></span>
   </div>
-  remote video<br />
+  remote video<br /> -->
   <div id="remote_container"></div>
 </body>
 <script>
