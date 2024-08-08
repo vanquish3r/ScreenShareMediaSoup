@@ -66,8 +66,6 @@
 
       socket.on('connect', async function (evt) {
         console.log('socket.io connected()');
-
-        sendRequest('connectRoom', { room: room });
         // --- prepare room ---
       });
 
@@ -266,6 +264,7 @@
         console.error(err);
         return;
       });
+      await  sendRequest('connectRoom', { room: room });
 
       // --- get capabilities --
       const data = await sendRequest('getRouterRtpCapabilities', {});
