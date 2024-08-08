@@ -112,6 +112,7 @@ io.on('connection', function (socket) {
     if (existRoom) {
       console.log('--- use exist room. roomId=' + data.room);
       socket.room = data.room;
+      socket.join(data.room);
       sendResponse(data, callback);
       console.log("after send response");
     } else {
