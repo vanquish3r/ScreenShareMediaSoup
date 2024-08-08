@@ -113,6 +113,7 @@ io.on('connection', function (socket) {
       console.log('--- use exist room. roomId=' + data.room);
       socket.room = data.room;
       sendResponse(data, callback);
+      console.log("after send response");
     } else {
       sendReject({ text: 'ERROR- Room does not exist!' }, callback);
     }
