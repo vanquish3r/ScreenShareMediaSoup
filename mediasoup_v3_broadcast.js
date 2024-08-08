@@ -114,7 +114,6 @@ io.on('connection', function (socket) {
       socket.room = data.room;
       socket.join(data.room);
       sendResponse(data, callback);
-      console.log("after send response");
     } else {
       sendReject({ text: 'ERROR- Room does not exist!' }, callback);
     }
@@ -138,7 +137,7 @@ io.on('connection', function (socket) {
 
   socket.on('getRouterRtpCapabilities', (data, callback) => {
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, true, callback)) {
+    if(notInRoom(socket, room, false, callback)) {
       return;
     }
     if (room.router) {
