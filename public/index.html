@@ -67,8 +67,8 @@
       socket.on('connect', async function (evt) {
         console.log('socket.io connected()');
 
+        sendRequest('connectRoom', { room: room });
         // --- prepare room ---
-        await sendRequest('prepare_room', { roomId: room });
       });
 
       socket.on('error', function (err) {

@@ -76,7 +76,7 @@
       socket.on('connect', async function (evt) {
         console.log('socket.io connected()');
         // --- prepare room ---
-        sendRequest('connectRoom', { room: room });
+        sendRequest('createRoom', { room: room });
       });
       socket.on('error', function (err) {
         console.error('socket.io ERROR:', err);
