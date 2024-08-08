@@ -136,7 +136,7 @@ io.on('connection', function (socket) {
 
   socket.on('getRouterRtpCapabilities', (data, callback) => {
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, true)) {
+    if(notInRoom(socket, room, true, callback)) {
       return;
     }
     if (room.router) {
@@ -152,7 +152,7 @@ io.on('connection', function (socket) {
   socket.on('createProducerTransport', async (data, callback) => {
     console.log('-- createProducerTransport ---');
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, true)) {
+    if(notInRoom(socket, room, true, callback)) {
       return;
     }
     const { transport, params } = await createTransport(room);
@@ -174,7 +174,7 @@ io.on('connection', function (socket) {
 
   socket.on('connectProducerTransport', async (data, callback) => {
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, true)) {
+    if(notInRoom(socket, room, true, callback)) {
       return;
     }
     await room.producerTransport.connect({ dtlsParameters: data.dtlsParameters });
@@ -184,7 +184,7 @@ io.on('connection', function (socket) {
   socket.on('produce', async (data, callback) => {
     const { kind, rtpParameters } = data;
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, true)) {
+    if(notInRoom(socket, room, true, callback)) {
       return;
     }
     console.log('-- produce --- kind=', kind);
@@ -216,7 +216,7 @@ io.on('connection', function (socket) {
   socket.on('createConsumerTransport', async (data, callback) => {
     console.log('-- createConsumerTransport ---');
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, false)) {
+    if(notInRoom(socket, room, false, callback)) {
       return;
     }
     const { transport, params } = await createTransport();
@@ -232,7 +232,7 @@ io.on('connection', function (socket) {
   socket.on('connectConsumerTransport', async (data, callback) => {
     console.log('-- connectConsumerTransport ---');
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, false)) {
+    if(notInRoom(socket, room, false, callback)) {
       return;
     }
     let transport = room.consumerTransports[socket.id];
@@ -249,7 +249,7 @@ io.on('connection', function (socket) {
     const kind = data.kind;
     console.log('-- consume --kind=' + kind);
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, false)) {
+    if(notInRoom(socket, room, false, callback)) {
       return;
     }
 
@@ -317,7 +317,7 @@ io.on('connection', function (socket) {
     const kind = data.kind;
     console.log('-- resume -- kind=' + kind);
     const room = Room.getRoom(socket.room);
-    if(notInRoom(socket, room, false)) {
+    if(notInRoom(socket, room, false, callback)) {
       return;
     }
     if (kind === 'video') {
@@ -439,23 +439,12 @@ function getClientCount() {
 
 function cleanUpPeer(socket) {
   const room = Room.getRoom(socket.room);
-  // const consumer = room.videoConsumers[id];
-  // if (consumer) {
-  //   consumer.close();
-  //   delete room.videoConsumers[id]
-  // }
-
-  // const transport = room.consumerTransports[id];
-  // if (transport) {
-  //   transport.close();
-  //   removeConsumerTransport(id);
-  // }
-  if(notInRoom(socket, room, false)) {
+  if(!room) {
     return;
   }
   if(room.producerSocketId === socket.id) {
     Room.removeRoom(room.name);
-  }else if(Room.getRoom(socket.room)){
+  }else{
     killConsumer(socket);
   }
   socket.leave(socket.room);
