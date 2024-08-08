@@ -219,7 +219,7 @@ io.on('connection', function (socket) {
     if(notInRoom(socket, room, false, callback)) {
       return;
     }
-    const { transport, params } = await createTransport();
+    const { transport, params } = await createTransport(room);
     room.consumerTransports[socket.id] = transport;
     // addConsumerTrasport(getId(socket), transport);
     transport.observer.on('close', () => {
