@@ -256,7 +256,9 @@
   }
 
   // ============ UI button ==========
-
+  setTimeout(async () => {
+    await subscribe();
+  }, 2000);
 
   async function subscribe() {
     if (!isSocketConnected()) {
