@@ -264,13 +264,7 @@
         console.error(err);
         return;
       });
-      console.log("here");
       const connectData = await sendRequest('connectRoom', { room: room });
-      console.log("here1");
-      socket.on('connectRoom',(...args) => {
-        console.log(args);
-      })
-
       // --- get capabilities --
       const data = await sendRequest('getRouterRtpCapabilities', {});
       console.log('getRouterRtpCapabilities:', data);

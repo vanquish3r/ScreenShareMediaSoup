@@ -363,8 +363,8 @@ class Room{
     this.audioProducer;
 
     this.consumerTransports = {};
-    this.videoConsumerSets = {};
-    this.audioConsumerSets = {};
+    this.videoConsumers = {};
+    this.audioConsumers = {};
     this.createRouter();
   }
 
