@@ -141,7 +141,6 @@ io.on('connection', function (socket) {
       return;
     }
     if (room.router) {
-      console.log('getRouterRtpCapabilities: ', room.router.rtpCapabilities);
       sendResponse(room.router.rtpCapabilities, callback);
     }
     else {
