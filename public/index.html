@@ -376,6 +376,7 @@
 
   async function loadDevice(routerRtpCapabilities) {
     try {
+      console.log(routerRtpCapabilities);
       device = new MediasoupClient.Device();
     } catch (error) {
       if (error.name === 'UnsupportedError') {
