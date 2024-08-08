@@ -203,7 +203,6 @@ io.on('connection', function (socket) {
     }
     else {
       console.error('produce ERROR. BAD kind:', kind);
-      //sendResponse({}, callback);
       return;
     }
 
