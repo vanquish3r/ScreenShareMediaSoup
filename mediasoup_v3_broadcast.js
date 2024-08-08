@@ -34,7 +34,7 @@
 const fs = require('fs');
 let serverOptions = {
   hostName: "screen.sdq.st",
-  listenPort: 8443,
+  listenPort: 443,
   useHttps: true,
   httpsKeyFile: "/usr/src/ssl/sdq.st.key",
   httpsCertFile: "/usr/src/ssl/sdq.st.cert"
