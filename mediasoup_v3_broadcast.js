@@ -585,7 +585,7 @@ function removeAllConsumers(room) {
   for (const key in room.videoConsumers) {
     killConsumer(key)
   }
-  console.log('removeAllConsumers videoConsumers count=' + Object.keys(room.videoConsumers).length);
+  console.log('removeAllConsumers videoConsumers');
 }
 
 async function createTransport(room) {
