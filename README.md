@@ -64,9 +64,9 @@ open http://localhost:3000/loopback.html with browser
 $ npm run broadast
 ```
 
-open http://localhost:3000/publish.html with browser for publisher
+open http://localhost:3000/publish.html?room=something with browser for publisher
 
-open http://localhost:3000/subscribe.html with browser for subscriber
+open http://localhost:3000/?room=something with browser for subscriber
 
 
 ## maltiparty video chat
