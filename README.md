@@ -1,3 +1,9 @@
+# EDIT: This is a modified version of an example of using mediasoup v3 from mganeko
+
+Original Code: https://github.com/mganeko/mediasoup_v3_example
+
+The modifications mainly include adding room capability to the broadcast example, and switching to screenshare instead of webcam to allow for a multi tennant screensharing system with one to many broadcast capability. This is intended for use inside the VR app Banter - https://bantervr.com
+
 # mediasoup_v3_example
 Examples for WebRTC SFU mediasoup v3 with node.js
 
@@ -49,33 +55,15 @@ $ npm run build-client
 
 # How to use
 
-## loopback (single)
-
-```
-$ npm run loopback
-```
-
-open http://localhost:3000/loopback.html with browser
-
-
 ## broadcast (1 to many)
 
 ```
 $ npm run broadast
 ```
 
-open http://localhost:3000/publish.html?room=something with browser for publisher
+open http://localhost:3000/publish.html?room=something&fps=30&width=1920&height=1080 with browser for publisher
 
 open http://localhost:3000/?room=something with browser for subscriber
-
-
-## maltiparty video chat
-
-```
-$ npm run multiparty
-```
-
-open http://localhost:3000/multi.html with browser
 
 # License / ライセンス
 
