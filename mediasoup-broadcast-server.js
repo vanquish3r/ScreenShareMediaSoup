@@ -33,7 +33,9 @@
 // --- read options ---
 const fs = require('fs');
 let serverOptions = {
-  hostName: "screenshare-ing.onrender.com"
+  hostName: "screenshare-ing.onrender.com",
+  listenPort: 8443,
+  useHttps: true,
 };
 let sslOptions = {};
 if (serverOptions.useHttps) {
